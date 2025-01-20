@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum voluptatum possimus sapiente praesentium
+        molestiae, aspernatur iusto animi, at ut perspiciatis labore quae optio alias quo mollitia a vel nesciunt rerum.
+    </p>
+<script>
+    var num1=prompt("enter number one");
+    var num2=prompt("enter number two");
+    var total=parseInt (num1) + parseInt (num2);
+    console.log(total);
+    alert(total)
+
+    let first_name = "Glory"
+    let last_name = "Kendi"
+    let full_name = first_name +" "+ last_name;
+    console.log(full_name);
+    console.log(full_name.endsWith('k'));
+    console.log(full_name.startsWith('G'));
+    console.log(full_name.toLocaleLowerCase().trim());
+
+
+    let mysplitname= full_name.split("y");
+    console.log(typeof mysplitname);
+    console.log(mysplitname[0]);
+
+    // data structures- Array, JSon object
+    let person={"name": "Titus", "Location":"NRB"}
+    console.log(person.Location);
+    console.log(typeof person);    
+
+    if (num1 > num2) {
+        console.log("num one is greater");
+    }
+    else if(num2>num1)
+    {
+        console.log("num two is greater");
+    }
+    else
+    {
+        console.log ('num one is equal to num two');   
+    }
+
+    // loops-repeats a cirtain block of code a specified number times but main
+    // pravctical reason for a loop is getting each values from a array
+
+    let people = ["john","mary","joel","sarah","mohammed"]
+
+    for(let i=0; i <people.length; i++)
+    {
+        console.log("loop at "+i)
+        console.log(people[i])
+    }
+
+
+</script>
+</body>
+
+</html>
