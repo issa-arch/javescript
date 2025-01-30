@@ -14,7 +14,7 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
         
-        <button type="submit" id="submitBtn" disabled>Login</button>
+        <button type="submit" id="submit" disabled>Login</button>
     </form>
 
     <script>
@@ -22,12 +22,12 @@
         let email = document.getElementById("email");
         let password = document.getElementById("password");
         let error = document.getElementById("error");
-        let submitBtn = document.getElementById("submitBtn");
+        let submit = document.getElementById("submit");
         let attempts = 0;
         let maxAttempt=5;
 
         function checkInputs() {
-            submitBtn.disabled = !(email.value.trim() && password.value.trim());
+            submit.disabled = !(email.value.trim() && password.value.trim());
         }
 
         email.addEventListener("input", checkInputs);
