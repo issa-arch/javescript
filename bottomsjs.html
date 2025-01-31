@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY-CODE</title>
+</head>
+
+<body>
+
+    <!-- task 1 -->
+    <button onclick="showAlert()">Click me</button>
+    <br>
+    <!-- Task 2 -->
+    <p id="text">Hi my name issa</p>
+    <button onclick="changeText()">Change Text</button>
+    <br>
+    <br>
+    <!-- Task 4 -->
+    <button onclick="updateInput()">Update Input</button>
+    <input type="text" id="inputField">
+
+
+    <script>
+        function showAlert() {
+            alert("Hello, Essa!");
+        }
+
+        function changeText() {
+            document.getElementById("text").innerText = "Hello Welcome to our page!";
+        }
+
+        function updateInput() {
+            document.getElementById("inputField").value = "Hello, JavaScript!";
+        }
+    </script>
+
+</body>
+
+</html>
