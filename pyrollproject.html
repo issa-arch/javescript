@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Pay Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #ff6600;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 80%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #e65c00;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #ff6600;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Net Pay Calculator</h2>
+        <p>Enter the gross salary below to calculate your net amount.</p>
+
+        <div class="input-section">
+            <label for="basicSalary">Basic Salary:</label>
+            <input type="number" id="basicSalary" placeholder="KES">
+
+            <label for="benefits">Benefits:</label>
+            <input type="number" id="benefits" placeholder="KES">
+
+            <button id="calculateBtn">CALCULATE</button>
+        </div>
+
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Result (KES)</th>
+            </tr>
+            <tr>
+                <td>Gross Salary</td>
+                <td id="grossSalary">0.00</td>
+            </tr>
+            <tr>
+                <td>NSSF</td>
+                <td id="nssf">0.00</td>
+            </tr>
+            <tr>
+                <td>PAYE</td>
+                <td id="paye">0.00</td>
+            </tr>
+            <tr>
+                <td>NHIF</td>
+                <td id="nhif">0.00</td>
+            </tr>
+            <tr>
+                <td><strong>Net Pay</strong></td>
+                <td id="netPay"><strong>0.00</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("calculateBtn").addEventListener("click", function () {
+            let basicSalary = parseFloat(document.getElementById("basicSalary").value) || 0;
+            let benefits = parseFloat(document.getElementById("benefits").value) || 0;
+
+            let grossSalary = basicSalary + benefits;
+
+            let nssf = Math.min(grossSalary * 0.06, 1080);
+            let nhif = calculateNHIF(grossSalary);
+            let taxableIncome = grossSalary - nssf;
+            let paye = calculatePAYE(taxableIncome);
+            let netPay = grossSalary - (nssf + nhif + paye);
+
+            document.getElementById("grossSalary").textContent = grossSalary.toFixed(2);
+            document.getElementById("nssf").textContent = nssf.toFixed(2);
+            document.getElementById("paye").textContent = paye.toFixed(2);
+            document.getElementById("nhif").textContent = nhif.toFixed(2);
+            document.getElementById("netPay").textContent = netPay.toFixed(2);
+        });
+
+
+        function calculatePAYE(taxable_income) {
+            let personal_relief = 2400;
+            if (taxable_income <= 24000) {
+                payeetax = taxable_income * 0.10;
+            } else if (taxable_income <= 24000 + 8333) {
+                payeetax = (24000 * 0.10) + ((taxable_income - 24000) * 0.25);
+            } else if (taxable_income <= 24000 + 8333 + 467667) {
+                payeetax = (24000 * 0.10) + (8333 * 0.25) + ((taxable_income - 24000 - 8333) * 0.30);
+            } else if (taxable_income <= 24000 + 8333 + 467667 + 300000) {
+                payeetax = (24000 * 0.10) + (8333 * 0.25) + (467667 * 0.30) + ((taxable_income - 24000 - 8333 - 467667) * 0.325);
+            } else {
+                payeetax = (24000 * 0.10) + (8333 * 0.25) + (467667 * 0.30) + (300000 * 0.325) + ((taxable_income - 24000 - 8333 - 467667 - 300000) * 0.35);
+            }
+            payeetax -= personal_relief;
+            return payeetax;
+
+        }
+
+        function calculateNHIF(salary) {
+            if (salary <= 5999) return 150;
+            if (salary <= 7999) return 300;
+            if (salary <= 11999) return 400;
+            if (salary <= 14999) return 500;
+            if (salary <= 19999) return 600;
+            if (salary <= 24999) return 750;
+            if (salary <= 29999) return 850;
+            if (salary <= 34999) return 900;
+            if (salary <= 39999) return 950;
+            if (salary <= 44999) return 1000;
+            if (salary <= 49999) return 1100;
+            if (salary <= 59999) return 1200;
+            if (salary <= 69999) return 1300;
+            if (salary <= 79999) return 1400;
+            if (salary <= 89999) return 1500;
+            if (salary <= 99999) return 1600;
+            return 1700;
+        }
+    </script>
+</body>
+
+</html>
